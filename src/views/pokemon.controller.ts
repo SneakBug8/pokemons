@@ -23,35 +23,41 @@ export class PokemonController
         const pokemon = await this.pokemonService.GetByUrl(pokemonurl);
 
         if (!pokemon) {
-            res.send("No such pokemon");
+            res.render("error", {
+                content: "Такого покемона не существует"
+            });
+
             return;
         }
 
         let userid: string | undefined;
         let user: User | undefined;
 
-        if (req.cookies && req.cookies.id) {
-            userid = req.cookies.id;
-
-            if (userid) {
-                user = await this.userService.GetById(userid as string);
-            }
+        if (!req.cookies || !req.cookies.id) {
+            user = this.userService.CreateUserForRequest(res);
         }
+        else {
+            userid = req.cookies.id;
+            user = await this.userService.GetById(userid as string);
 
-        if (!user) {
-            this.userService.CreateUserForRequest(res);
-            return;
+            if (!user) {
+                user = this.userService.CreateUserForRequest(res);
+            }
         }
 
         if (!user.captures.find((x) => x === pokemonurl)) {
             user.captures.push(pokemonurl);
-            res.send("You captured pokemon " + pokemonurl);
+            res.render("action", {
+                content: "Вы поймали покемона " + pokemon.name
+            });
 
             this.userService.Save(user);
             return;
         }
         else {
-            res.send("You have already captured that pokemon");
+            res.render("action", {
+                content: "Вы уже ловили этого покемона"
+            });
             return;
         }
     }

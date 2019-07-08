@@ -1,0 +1,12 @@
+{{#extend "index"}}
+{{#content "content"}}
+Ваш id: {{user.id}}
+<hr>
+<b>Пойманные покемоны:</b>
+<ul>
+{{#each pokemons}}
+<li>{{name}}</li>
+{{/each}}
+</ul>
+{{/content}}
+{{/extend}}

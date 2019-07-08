@@ -3,30 +3,46 @@ import { UserService } from "core/user.service";
 import { User } from "../core/user";
 
 import * as express from "express";
+import { Pokemon } from "core/pokemon";
+import { PokemonService } from "core/pokemon.service";
 
 @Controller()
 export class UserController
 {
-    constructor(private readonly userService: UserService) { }
+    constructor(private readonly userService: UserService,
+        private readonly pokemonService: PokemonService) { }
 
     @Get("/")
     private async handleRequest(@Req() req: express.Request, @Res() res: express.Response)
     {
-        if (!req.cookies || !req.cookies.id) {
-            console.log("Creating user because of cookie");
-            this.userService.CreateUserForRequest(res);
-            return;
-        }
+        let userid: string | undefined;
+        let user: User | undefined;
 
-        const userid = req.cookies.id;
-        const user = await this.userService.GetById(userid as string);
+        if (!req.cookies || !req.cookies.id) {
+            user = this.userService.CreateUserForRequest(res);
+        }
+        else {
+            userid = req.cookies.id;
+            user = await this.userService.GetById(userid as string);
+        }
 
         if (!user) {
-            console.log("Creating user because of wrong id");
-            this.userService.CreateUserForRequest(res);
-            return;
+            user = this.userService.CreateUserForRequest(res);
         }
 
-        res.json(user);
+        const pokemons: Pokemon[] = [];
+        for (let pokemonid of user.captures) {
+            let pokemon = await this.pokemonService.GetByUrl(pokemonid);
+
+            if (pokemon) {
+                pokemons.push(pokemon);
+            }
+        }
+
+        res.render("user", {
+            user,
+            pokemons,
+            hidehomelink: true
+        });
     }
 }

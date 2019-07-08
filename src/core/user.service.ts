@@ -41,6 +41,16 @@ export class UserService
         return user.id;
     }
 
+    public Create(): User
+    {
+        const user = new User();
+        user.id = Math.round(Math.random() * Number.MAX_SAFE_INTEGER).toString();
+
+        this.Save(user);
+
+        return user;
+    }
+
     public CreateUserForRequest(res: express.Response)
     {
         const user = this.Create();
@@ -48,16 +58,6 @@ export class UserService
         res.cookie("id", user.id, {
             expires: new Date(Date.now() + 900000)
         });
-
-        res.send("Created user with id " + user.id + " for you.");
-    }
-
-    public Create(): User
-    {
-        const user = new User();
-        user.id = Math.round(Math.random() * Number.MAX_SAFE_INTEGER).toString();
-
-        this.Save(user);
 
         return user;
     }
