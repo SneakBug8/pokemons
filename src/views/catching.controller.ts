@@ -5,7 +5,7 @@ import { User } from "../core/user";
 import { UserService } from "../core/user.service";
 
 @Controller()
-export class PokemonController
+export class CatchingController
 {
     constructor(private readonly pokemonService: PokemonService,
         private readonly userService: UserService) { }

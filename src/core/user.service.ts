@@ -3,13 +3,15 @@ import { CmsService } from "cms/cms.service";
 import { User } from "./user";
 
 import * as express from "express";
+import { EmojiService } from "./emoji.service";
 
 @Injectable()
 export class UserService
 {
     private readonly usersTable = "pokemonusers";
 
-    constructor(private readonly cmsService: CmsService) { }
+    constructor(private readonly cmsService: CmsService,
+        private readonly emojiService: EmojiService) { }
 
     public async GetById(id: string): Promise<User | undefined>
     {
@@ -45,6 +47,7 @@ export class UserService
     {
         const user = new User();
         user.id = Math.round(Math.random() * Number.MAX_SAFE_INTEGER).toString();
+        user.emojies = this.emojiService.Generate();
 
         this.Save(user);
 
@@ -56,7 +59,7 @@ export class UserService
         const user = this.Create();
 
         res.cookie("id", user.id, {
-            expires: new Date(Date.now() + 900000)
+            expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)
         });
 
         return user;
