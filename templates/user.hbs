@@ -5,9 +5,9 @@
 <hr>
 <b>Пойманные покемоны:</b>
 <ul>
-{{#each pokemons}}
-<li>{{name}}</li>
-{{/each}}
+    {{#each pokemons}}
+    <li><a href="/p/{{url}}">{{name}}</a></li>
+    {{/each}}
 </ul>
 {{/content}}
 {{/extend}}

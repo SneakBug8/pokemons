@@ -24,7 +24,7 @@ export class CatchingController
 
         if (!pokemon) {
             res.render("error", {
-                content: "Такого покемона не существует"
+                message: "Такого покемона не существует"
             });
 
             return;
@@ -48,7 +48,7 @@ export class CatchingController
         if (!user.captures.find((x) => x === pokemonurl)) {
             user.captures.push(pokemonurl);
             res.render("action", {
-                content: "Вы поймали покемона " + pokemon.name
+                message: "Вы поймали покемона " + pokemon.name
             });
 
             this.userService.Save(user);
@@ -56,7 +56,7 @@ export class CatchingController
         }
         else {
             res.render("action", {
-                content: "Вы уже ловили этого покемона"
+                message: "Вы уже ловили этого покемона"
             });
             return;
         }

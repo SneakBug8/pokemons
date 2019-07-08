@@ -1,7 +1,7 @@
 export interface Pokemon
 {
     name: string;
-    image: string;
+    image: { path: string } | undefined;
     description: string;
     url: string;
 }

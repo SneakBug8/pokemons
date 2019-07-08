@@ -1,13 +1,15 @@
 import { Injectable } from "@nestjs/common";
 import { CmsService } from "cms/cms.service";
 import { Pokemon } from "./pokemon";
+import DotenvService from "base/dotenv.service";
 
 @Injectable()
 export class PokemonService
 {
     private readonly pokemonTable = "pokemons";
 
-    constructor(private readonly cmsService: CmsService) { }
+    constructor(private readonly cmsService: CmsService,
+        private readonly configService: DotenvService) { }
 
     public async GetByUrl(url: string): Promise<Pokemon | undefined>
     {
@@ -19,6 +21,12 @@ export class PokemonService
             });
 
         if (res) {
+            const pokemon = res[0];
+
+            if (pokemon.image) {
+                pokemon.image.path = this.configService.config.CockpitUrl + pokemon.image.path;
+            }
+
             return res[0];
         }
 

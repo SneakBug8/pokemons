@@ -8,7 +8,7 @@ import { EmojiService } from "./emoji.service";
 @Injectable()
 export class UserService
 {
-    private readonly usersTable = "pokemonusers";
+    public readonly usersTable = "pokemonusers";
 
     constructor(private readonly cmsService: CmsService,
         private readonly emojiService: EmojiService) { }
@@ -67,6 +67,8 @@ export class UserService
 
     public Save(user: User)
     {
+        user.capturedamount = user.captures.length;
+
         this.cmsService.collections.save(this.usersTable, [user]);
     }
 }
