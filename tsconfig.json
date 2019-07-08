@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "outDir": "./bin",
+    "baseUrl": "./src",
+    "rootDir": "./src",
+    "strict": true,
+        "incremental": true,
+        "listEmittedFiles": true,
+        "pretty": true,
+        "sourceMap": true,
+        "declaration": false
+  },
+  "exclude": ["node_modules"]
+}
