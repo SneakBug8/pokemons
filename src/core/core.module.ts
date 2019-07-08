@@ -8,6 +8,6 @@ import { LeaderboardService } from "./leaderboard.service";
 @Module({
     imports: [CmsModule],
     providers: [EmojiService, PokemonService, UserService, LeaderboardService],
-    exports: [PokemonService, UserService]
+    exports: [PokemonService, UserService, LeaderboardService]
 })
 export class CoreModule { }

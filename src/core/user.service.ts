@@ -22,7 +22,9 @@ export class UserService
         });
 
         if (res) {
-            return res[0];
+            const user = res[0];
+            user.capturedamount = Number.parseInt(user.capturedamount as any, 10);
+            return user;
         }
 
         return undefined;
@@ -49,18 +51,23 @@ export class UserService
         user.id = Math.round(Math.random() * Number.MAX_SAFE_INTEGER).toString();
         user.emojies = this.emojiService.Generate();
 
-        this.Save(user);
-
         return user;
+    }
+
+    public SetCookie(res: express.Response, user: User)
+    {
+        res.cookie("id", user.id, {
+            expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)
+        });
     }
 
     public CreateUserForRequest(res: express.Response)
     {
         const user = this.Create();
 
-        res.cookie("id", user.id, {
-            expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)
-        });
+        this.SetCookie(res, user);
+
+        this.Save(user);
 
         return user;
     }

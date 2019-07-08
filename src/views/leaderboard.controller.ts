@@ -11,18 +11,19 @@ export class LeaderboardController
     @Get("leaderboard")
     private async handleRequest(@Res() res: express.Response)
     {
-        const leaderboard = this.leaderboardService.GetLeaderboard();
+        const leaderboard = await this.leaderboardService.GetLeaderboard();
 
         if (!leaderboard) {
             res.render("error", {
                 message: "Что-то пошло не так"
-            })
+            });
         }
 
         console.log(leaderboard);
 
         res.render("leaderboard", {
-            leaderboard
+            leaderboard,
+            hideleaderboardlink: 1
         });
     }
 }

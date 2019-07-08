@@ -26,7 +26,6 @@ export class CatchingController
             res.render("error", {
                 message: "Такого покемона не существует"
             });
-
             return;
         }
 
@@ -34,14 +33,16 @@ export class CatchingController
         let user: User | undefined;
 
         if (!req.cookies || !req.cookies.id) {
-            user = this.userService.CreateUserForRequest(res);
+            user = this.userService.Create();
+            this.userService.SetCookie(res, user);
         }
         else {
             userid = req.cookies.id;
             user = await this.userService.GetById(userid as string);
 
             if (!user) {
-                user = this.userService.CreateUserForRequest(res);
+                user = this.userService.Create();
+                this.userService.SetCookie(res, user);
             }
         }
 

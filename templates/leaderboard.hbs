@@ -1,0 +1,42 @@
+{{#extend "index"}}
+{{#content "content"}}
+<table>
+    <thead>
+        <th>
+            Id
+        </th>
+        <th>
+            Emojies
+        </th>
+        <th>
+            Captures
+        </th>
+        <th>
+            Captured amount
+        </th>
+        <th>
+            Received prize
+        </th>
+    </thead>
+    {{#each leaderboard}}
+    <tr>
+        <td>
+            {{id}}
+        </td>
+        <td>
+            {{emojies}}
+        </td>
+        <td>
+            {{captures}}
+        </td>
+        <td>
+            {{capturedamount}}
+        </td>
+        <td>
+            {{receivedprize}}
+        </td>
+    </tr>
+    {{/each}}
+</table>
+{{/content}}
+{{/extend}}

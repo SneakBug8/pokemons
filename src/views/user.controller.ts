@@ -31,8 +31,8 @@ export class UserController
         }
 
         const pokemons: Pokemon[] = [];
-        for (let pokemonid of user.captures) {
-            let pokemon = await this.pokemonService.GetByUrl(pokemonid) as any;
+        for (const pokemonid of user.captures) {
+            const pokemon = await this.pokemonService.GetByUrl(pokemonid) as any;
 
             if (pokemon) {
                 pokemons.push(pokemon);
