@@ -53,10 +53,6 @@ export class CmsService
         },
         save: async (collectionName: string, requestBody: any) =>
         {
-            console.log(JSON.stringify({
-                data: requestBody
-            }));
-
             const init = {
                 method: "post",
                 headers: {

@@ -24,6 +24,11 @@ export class PokemonService
             const pokemon = res[0];
 
             if (pokemon.image) {
+
+                if (!pokemon.image.path.startsWith("/")) {
+                    pokemon.image.path = "/" + pokemon.image.path;
+                }
+
                 pokemon.image.path = this.configService.config.CockpitUrl + pokemon.image.path;
             }
 
