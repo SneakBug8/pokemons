@@ -1,28 +1,25 @@
 {{#extend "index"}}
 {{#content "content"}}
-<table>
+<table class="table">
     <thead>
         <th>
-            Id
+            Код
         </th>
         <th>
-            Emojies
+            Количество пойманного
         </th>
         <th>
-            Captures
-        </th>
-        <th>
-            Captured amount
-        </th>
-        <th>
-            Received prize
+            Получил приз
         </th>
     </thead>
+    <tbody>
+    <tr>
+      <td><s>👉🥝🥪</s></td>
+      <td><s>10</s></td>
+      <td>да</td>
+    </tr>
     {{#each leaderboard}}
     <tr>
-        <td>
-            {{id}}
-        </td>
         <td>
             {{emojies}}
         </td>
@@ -34,6 +31,7 @@
         </td>
     </tr>
     {{/each}}
+    </tbody>
 </table>
 {{/content}}
 {{/extend}}
