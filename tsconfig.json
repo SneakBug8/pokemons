@@ -9,11 +9,11 @@
     "baseUrl": "./src",
     "rootDir": "./src",
     "strict": true,
-        "incremental": true,
-        "listEmittedFiles": true,
-        "pretty": true,
-        "sourceMap": true,
-        "declaration": false
+    "incremental": true,
+    "listEmittedFiles": true,
+    "pretty": true,
+    "sourceMap": true,
+    "declaration": false
   },
   "exclude": ["node_modules"]
 }
