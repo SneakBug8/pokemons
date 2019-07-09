@@ -1,7 +1,8 @@
 {{#extend "index"}}
 {{#content "content"}}
-Ваш id: {{user.id}}<br>
-{{user.emojies}}
+<p>Ваш уникальный код:</p>
+<h3>{{user.emojies}}</h3>
+{{#pokemons}}
 <hr>
 <b>Пойманные покемоны:</b>
 <ul>
@@ -9,5 +10,6 @@
     <li><a href="/p/{{url}}">{{name}}</a></li>
     {{/each}}
 </ul>
+{{/pokemons}}
 {{/content}}
 {{/extend}}
