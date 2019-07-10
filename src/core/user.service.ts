@@ -48,7 +48,7 @@ export class UserService
     public Create(): User
     {
         const user = new User();
-        user.id = Math.round(Math.random() * Number.MAX_SAFE_INTEGER).toString();
+        user.id = Math.round(Math.random() * 10000).toString();
         user.emojies = this.emojiService.Generate();
 
         return user;
