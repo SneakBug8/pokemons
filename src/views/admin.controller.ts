@@ -4,7 +4,7 @@ import * as express from "express";
 import { LeaderboardService } from "core/leaderboard.service";
 
 @Controller()
-export class LeaderboardController
+export class AdminController
 {
     constructor(private readonly leaderboardService: LeaderboardService) { }
 
@@ -25,8 +25,6 @@ export class LeaderboardController
                 message: "Что-то пошло не так"
             });
         }
-
-        console.log(leaderboard);
 
         res.render("admin", {
             leaderboard

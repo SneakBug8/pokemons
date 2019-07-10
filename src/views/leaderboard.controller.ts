@@ -19,8 +19,6 @@ export class LeaderboardController
             });
         }
 
-        console.log(leaderboard);
-
         res.render("leaderboard", {
             leaderboard,
             hideleaderboardlink: 1

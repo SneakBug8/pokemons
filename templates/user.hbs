@@ -2,7 +2,7 @@
   {{#content "content"}}
     <p>Ваш уникальный код:</p>
     <h3>{{user.emojies}}</h3>
-    {{#pokemons}}
+    {{#if pokemons}}
       <hr>
       <b>Пойманные покемоны:</b>
       <ul>
@@ -10,6 +10,6 @@
           <li><a href="/p/{{url}}">{{name}}</a></li>
         {{/each}}
       </ul>
-    {{/pokemons}}
+    {{/if}}
   {{/content}}
 {{/extend}}

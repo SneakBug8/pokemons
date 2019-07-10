@@ -9,29 +9,30 @@
             Код
         </th>
         <th>
-            Количество пойманного
-        </th>
-        <th>
-            Получил приз
+            Поймано
         </th>
     </thead>
     <tbody>
-    {{#each leaderboard}}
-    <tr>
-        <td>
-            {{id}}
-        </td>
-        <td>
-            {{emojies}}
-        </td>
-        <td>
-            {{capturedamount}}
-        </td>
-        <td>
-            {{receivedprize}}
-        </td>
-    </tr>
-    {{/each}}
+        {{#each leaderboard}}
+        <tr>
+            {{#if receivedprize}}
+            <td colspan="2"><s>{{emojies}}</s></td>
+            <td>
+                <s>{{capturedamount}}</s>
+            </td>
+            {{else}}
+            <td>
+                {{id}}
+            </td>
+            <td>
+                {{emojies}}
+            </td>
+            <td>
+                {{capturedamount}}
+            </td>
+            {{/if}}
+        </tr>
+        {{/each}}
     </tbody>
 </table>
 {{/content}}

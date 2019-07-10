@@ -4,9 +4,10 @@ import { CatchingController } from "./catching.controller";
 import { UserController } from "./user.controller";
 import { PokemonController } from "./pokemon.controller";
 import { LeaderboardController } from "./leaderboard.controller";
+import { AdminController } from "./admin.controller";
 
 @Module({
     imports: [CoreModule],
-    controllers: [UserController, CatchingController, PokemonController, LeaderboardController]
+    controllers: [UserController, CatchingController, PokemonController, LeaderboardController, AdminController]
 })
 export class ViewsModule {}

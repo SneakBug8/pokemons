@@ -12,17 +12,18 @@
   </head>
 
   <body>
+    <a href="/"><img class="w-100 img-responsive" style="overflow-x: hidden;" src="/header.jpg"></a>
     <div class="container my-5">
-      {{#block "content"}}
-      {{/block}}
-
-      <hr>
       {{#unless hidehomelink}}
       <a class="btn btn-primary" href="/">Мой профиль</a>
       {{/unless}}
       {{#unless hideleaderboardlink}}
       <a class="btn btn-primary" href="/leaderboard">Таблица лидеров</a>
       {{/unless}}
+      <hr>
+
+      {{#block "content"}}
+      {{/block}}
     </div>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">

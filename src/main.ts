@@ -33,10 +33,7 @@ async function bootstrap()
 
   const templatesPath = config.templatesPath || "templates";
 
-  app.useStaticAssets(path.join(__dirname, "..", "root"));
-  app.useStaticAssets(path.join(__dirname, "..", "static"), {
-    prefix: "/static"
-  });
+  app.useStaticAssets(path.join(__dirname, "..", "public"));
 
   app.setBaseViewsDir(path.join(__dirname, "..", templatesPath));
   app.setViewEngine("hbs");
