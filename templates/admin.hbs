@@ -3,20 +3,32 @@
 <table class="table">
     <thead>
         <th>
+            Id
+        </th>
+        <th>
             Код
         </th>
         <th>
             Количество пойманного
+        </th>
+        <th>
+            Получил приз
         </th>
     </thead>
     <tbody>
     {{#each leaderboard}}
     <tr>
         <td>
+            {{id}}
+        </td>
+        <td>
             {{emojies}}
         </td>
         <td>
             {{capturedamount}}
+        </td>
+        <td>
+            {{receivedprize}}
         </td>
     </tr>
     {{/each}}
