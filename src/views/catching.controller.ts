@@ -33,33 +33,29 @@ export class CatchingController
         let user: User | undefined;
 
         if (!req.cookies || !req.cookies.id) {
-            user = this.userService.Create();
-            this.userService.SetCookie(res, user);
+            return this.userService.CreateUserForRequest(req, res);
         }
         else {
             userid = req.cookies.id;
             user = await this.userService.GetById(userid as string);
 
             if (!user) {
-                user = this.userService.Create();
-                this.userService.SetCookie(res, user);
+                return this.userService.CreateUserForRequest(req, res);
             }
         }
 
         if (!user.captures.find((x) => x === pokemonurl)) {
             user.captures.push(pokemonurl);
-            res.render("action", {
+            this.userService.Save(user);
+
+            return res.render("action", {
                 message: "Вы поймали покемона " + pokemon.name
             });
-
-            this.userService.Save(user);
-            return;
         }
         else {
-            res.render("action", {
+            return res.render("action", {
                 message: "Вы уже ловили этого покемона"
             });
-            return;
         }
     }
 }

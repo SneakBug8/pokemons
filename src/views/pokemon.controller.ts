@@ -22,14 +22,12 @@ export class PokemonController
         const pokemon = await this.pokemonService.GetByUrl(pokemonurl);
 
         if (!pokemon) {
-            res.render("error", {
+            return res.render("error", {
                 message: "Такого покемона не существует"
             });
-
-            return;
         }
 
-        res.render("pokemon", {
+        return res.render("pokemon", {
             pokemon
         });
     }

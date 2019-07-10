@@ -19,7 +19,7 @@ export class UserController
         let user: User | undefined;
 
         if (!req.cookies || !req.cookies.id) {
-            user = this.userService.CreateUserForRequest(res);
+            return this.userService.CreateUserForRequest(req, res);
         }
         else {
             userid = req.cookies.id;
@@ -27,7 +27,7 @@ export class UserController
         }
 
         if (!user) {
-            user = this.userService.CreateUserForRequest(res);
+            return this.userService.CreateUserForRequest(req, res);
         }
 
         const pokemons: Pokemon[] = [];
@@ -39,7 +39,7 @@ export class UserController
             }
         }
 
-        res.render("user", {
+        return res.render("user", {
             user,
             pokemons,
             hidehomelink: true

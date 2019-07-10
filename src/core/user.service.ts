@@ -61,15 +61,14 @@ export class UserService
         });
     }
 
-    public CreateUserForRequest(res: express.Response)
+    public CreateUserForRequest(req: express.Request, res: express.Response)
     {
         const user = this.Create();
 
         this.SetCookie(res, user);
-
         this.Save(user);
 
-        return user;
+        return res.redirect(req.url);
     }
 
     public Save(user: User)

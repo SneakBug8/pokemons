@@ -21,12 +21,12 @@ export class AdminController
         const leaderboard = await this.leaderboardService.GetLeaderboard();
 
         if (!leaderboard) {
-            res.render("error", {
+            return res.render("error", {
                 message: "Что-то пошло не так"
             });
         }
 
-        res.render("admin", {
+        return res.render("admin", {
             leaderboard
         });
     }

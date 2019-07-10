@@ -14,12 +14,12 @@ export class LeaderboardController
         const leaderboard = await this.leaderboardService.GetLeaderboard();
 
         if (!leaderboard) {
-            res.render("error", {
+            return res.render("error", {
                 message: "Что-то пошло не так"
             });
         }
 
-        res.render("leaderboard", {
+        return res.render("leaderboard", {
             leaderboard,
             hideleaderboardlink: 1
         });
