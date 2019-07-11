@@ -15,7 +15,8 @@ export class AdminController
         if (req.headers.authorization !== "Basic dGVzdDp0ZXN0") {
             // tslint:disable-next-line: quotemark
             res.setHeader("WWW-Authenticate", 'Basic realm="Pokemons"');
-            return res.status(401).send("Authentication required."); // Access denied.
+            return res.status(401).render("error",
+                { message: "Authentication required." }); // Access denied.
         }
 
         const leaderboard = await this.leaderboardService.GetLeaderboard();
@@ -24,6 +25,10 @@ export class AdminController
             return res.render("error", {
                 message: "Что-то пошло не так"
             });
+        }
+
+        for (const entry of leaderboard) {
+            (entry as any).show = entry.capturedamount > 0;
         }
 
         return res.render("admin", {

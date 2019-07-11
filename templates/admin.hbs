@@ -3,35 +3,42 @@
 <table class="table">
     <thead>
         <th>
-            Id
-        </th>
-        <th>
             Код
         </th>
         <th>
             Поймано
         </th>
+        <th>
+            Действия
+        </th>
     </thead>
     <tbody>
         {{#each leaderboard}}
+        {{#if show}}
         <tr>
             {{#if receivedprize}}
-            <td colspan="2"><s>{{emojies}}</s></td>
+            <td><s>{{emojies}}</s></td>
             <td>
                 <s>{{capturedamount}}</s>
             </td>
-            {{else}}
             <td>
-                {{id}}
+                <a class="btn btn-danger" href="#"
+                    onclick="var res = confirm('Исправить за {{emojies}}?'); if (res) {window.location='/fix/{{id}}'}">Исправить</a>
             </td>
+            {{else}}
             <td>
                 {{emojies}}
             </td>
             <td>
                 {{capturedamount}}
             </td>
+            <td>
+                <a class="btn btn-success" href="#"
+                    onclick="var res = confirm('Получить за {{emojies}}?'); if (res) {window.location='/receive/{{id}}'}">Получить</a>
+            </td>
             {{/if}}
         </tr>
+        {{/if}}
         {{/each}}
     </tbody>
 </table>

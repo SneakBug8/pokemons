@@ -5,11 +5,11 @@
     {{#if pokemons}}
       <hr>
       <b>Пойманные покемоны:</b>
-      <ul>
+      <ol>
         {{#each pokemons}}
           <li><a href="/p/{{url}}">{{name}}</a></li>
         {{/each}}
-      </ul>
+      </ol>
     {{/if}}
   {{/content}}
 {{/extend}}

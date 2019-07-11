@@ -19,6 +19,10 @@ export class LeaderboardController
             });
         }
 
+        for (const entry of leaderboard) {
+            (entry as any).show = entry.capturedamount > 0;
+        }
+
         return res.render("leaderboard", {
             leaderboard,
             hideleaderboardlink: 1
