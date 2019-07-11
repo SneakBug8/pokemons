@@ -11,14 +11,6 @@ export class AdminController
     @Get("admin")
     private async handleRequest(@Req() req: express.Request, @Res() res: express.Response)
     {
-        // test:test
-        if (req.headers.authorization !== "Basic dGVzdDp0ZXN0") {
-            // tslint:disable-next-line: quotemark
-            res.setHeader("WWW-Authenticate", 'Basic realm="Pokemons"');
-            return res.status(401).render("error",
-                { message: "Authentication required." }); // Access denied.
-        }
-
         const leaderboard = await this.leaderboardService.GetLeaderboard();
 
         if (!leaderboard) {

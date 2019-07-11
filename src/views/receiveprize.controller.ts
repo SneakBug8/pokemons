@@ -14,14 +14,6 @@ export class ReceiveprizeController
     @Get("/receive/:id")
     private async handleRequest(@Param("id") id: string, @Req() req: express.Request, @Res() res: express.Response)
     {
-        // test:test
-        if (req.headers.authorization !== "Basic dGVzdDp0ZXN0") {
-            // tslint:disable-next-line: quotemark
-            res.setHeader("WWW-Authenticate", 'Basic realm="Pokemons"');
-            return res.status(401).render("error",
-                { message: "Authentication required." }); // Access denied.
-        }
-
         if (!id) {
             return res.render("error", {
                 message: "Не указан id"
