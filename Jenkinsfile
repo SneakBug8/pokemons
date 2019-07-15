@@ -1,4 +1,4 @@
-R!groovy
+#!groovy
 
 def remote = [:];
 remote.host = "oreolek.ru";
