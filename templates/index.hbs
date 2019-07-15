@@ -12,7 +12,14 @@
   </head>
 
   <body>
-    <a href="/"><img class="w-100 img-responsive" style="overflow-x: hidden;" src="/header.jpg"></a>
+    <a href="/">
+      <picture>
+        <source media="(max-width: 301px)" srcset="/header_300.jpg">
+        <source media="(max-width: 501px)" srcset="/header_500.jpg">
+        <source media="(max-width: 961px)" srcset="/header_960.jpg">
+        <img class="w-100 img-responsive" style="overflow-x: hidden;" src="/header.jpg">
+      </picture>
+    </a>
     <div class="container my-5">
       {{#unless hidehomelink}}
       <a class="btn btn-primary" href="/">Мой профиль</a>
