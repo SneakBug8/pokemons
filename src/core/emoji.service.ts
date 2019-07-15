@@ -31,4 +31,4 @@ export class EmojiService
 
         return res;
     }
-};
+}

@@ -8,27 +8,28 @@ import { User } from "./user";
 @Injectable()
 export class LeaderboardService
 {
-    private readonly usersTable: string;
+  private readonly usersTable: string;
 
-    constructor(private readonly cmsService: CmsService,
-        private readonly userService: UserService)
+  constructor(
+    private readonly cmsService: CmsService,
+    private readonly userService: UserService
+  ) {
+    this.usersTable = userService.usersTable;
+  }
+
+  public async GetLeaderboard(): Promise<User[] | undefined>
     {
-        this.usersTable = userService.usersTable;
+      const res = await this.cmsService.collections.getWithParams<User[]>(this.usersTable,
+        {
+          sort: {
+            capturedamount: -1
+          }
+        });
+
+      if (res) {
+        return res;
+      }
+
+      return undefined;
     }
-
-    public async GetLeaderboard(): Promise<User[] | undefined>
-    {
-        const res = await this.cmsService.collections.getWithParams<User[]>(this.usersTable,
-            {
-                sort: {
-                    capturedamount: -1
-                }
-            });
-
-        if (res) {
-            return res;
-        }
-
-        return undefined;
-    }
-};
+}

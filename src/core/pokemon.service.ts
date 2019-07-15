@@ -6,35 +6,37 @@ import DotenvService from "base/dotenv.service";
 @Injectable()
 export class PokemonService
 {
-    private readonly pokemonTable = "pokemons";
+  private readonly pokemonTable = "pokemons";
 
-    constructor(private readonly cmsService: CmsService,
-        private readonly configService: DotenvService) { }
+  constructor(
+    private readonly cmsService: CmsService,
+    private readonly configService: DotenvService
+  ) { }
 
-    public async GetByUrl(url: string): Promise<Pokemon | undefined>
+  public async GetByUrl(url: string): Promise<Pokemon | undefined>
     {
-        const res = await this.cmsService.collections.getWithParams<Pokemon[]>(this.pokemonTable,
-            {
-                filter: {
-                    url
-                }
-            });
+      const res = await this.cmsService.collections.getWithParams<Pokemon[]>(this.pokemonTable,
+        {
+          filter: {
+            url
+          }
+        });
 
-        if (res) {
-            const pokemon = res[0];
+      if (res) {
+        const pokemon = res[0];
 
-            if (pokemon.image) {
+        if (pokemon.image) {
 
-                if (!pokemon.image.path.startsWith("/")) {
-                    pokemon.image.path = "/" + pokemon.image.path;
-                }
+          if (!pokemon.image.path.startsWith("/")) {
+            pokemon.image.path = "/" + pokemon.image.path;
+          }
 
-                pokemon.image.path = this.configService.config.CockpitUrl + pokemon.image.path;
-            }
-
-            return res[0];
+          pokemon.image.path = this.configService.config.CockpitUrl + pokemon.image.path;
         }
 
-        return undefined;
+        return res[0];
+      }
+
+      return undefined;
     }
-};
+}

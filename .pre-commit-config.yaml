@@ -2,7 +2,7 @@
   rev: master
   hooks:
     - id: tslint
-      args: ['--project','tsconfig.json','-c', 'tslint.json','--type-check']
+      args: ['--project','tsconfig.json','-c', 'tslint.json']
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v2.2.3
   hooks:

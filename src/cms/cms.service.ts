@@ -132,7 +132,7 @@ interface RequestParams
 
 export interface CmsObjectData
 {
-    _created: string,
-    _modified: string,
+    _created: string;
+    _modified: string;
     [key: string]: any;
 }
