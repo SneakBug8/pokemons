@@ -3,6 +3,7 @@
 /node_modules
 /bin
 package-lock.json
+pnpm-lock.yaml
 
 # Logs
 logs
@@ -37,3 +38,4 @@ lerna-debug.log*
 
 .env
 tsconfig.tsbuildinfo
+tsconfig.build.tsbuildinfo
