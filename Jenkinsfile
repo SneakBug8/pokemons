@@ -22,7 +22,9 @@ node {
           remote.user = userName;
           remote.passphrase = passPhrase;
           remote.identityFile = identity;
-          sshCommand remote: remote, command:'cd /var/www/frontend-sos; git pull; pnpm install;pnpm run build';
+          sshCommand remote: remote, command:'cd /var/www/frontend-sos && git pull';
+          sshCommand remote: remote, command:'cd /var/www/frontend-sos && pnpm install';
+          sshCommand remote: remote, command:'cd /var/www/frontend-sos && pnpm run build';
         }
       }
     }
