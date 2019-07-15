@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+const MarkdownIt = require("markdown-it")();
 import { CmsService } from "cms/cms.service";
 import { Pokemon } from "./pokemon";
 import DotenvService from "base/dotenv.service";
@@ -32,6 +33,10 @@ export class PokemonService
           }
 
           pokemon.image.path = this.configService.config.CockpitUrl + pokemon.image.path;
+        }
+
+        if (pokemon.description) {
+          pokemon.description = MarkdownIt.render(pokemon.description);
         }
 
         return res[0];

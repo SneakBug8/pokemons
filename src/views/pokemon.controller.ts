@@ -7,28 +7,28 @@ import { UserService } from "../core/user.service";
 @Controller()
 export class PokemonController
 {
-    constructor(private readonly pokemonService: PokemonService) { }
+  constructor(private readonly pokemonService: PokemonService) { }
 
-    @Get("p/*")
-    private async handleRequest(@Req() req: express.Request, @Res() res: express.Response)
-    {
-        const match = new RegExp("p/(.+)/?").exec(req.url);
+  @Get("p/*")
+  private async handleRequest(@Req() req: express.Request, @Res() res: express.Response)
+  {
+    const match = new RegExp("p/(.+)/?").exec(req.url);
 
-        if (!match) {
-            return;
-        }
-
-        const pokemonurl = match[1];
-        const pokemon = await this.pokemonService.GetByUrl(pokemonurl);
-
-        if (!pokemon) {
-            return res.render("error", {
-                message: "Такого покемона не существует"
-            });
-        }
-
-        return res.render("pokemon", {
-            pokemon
-        });
+    if (!match) {
+      return;
     }
+
+    const pokemonurl = match[1];
+    const pokemon = await this.pokemonService.GetByUrl(pokemonurl);
+
+    if (!pokemon) {
+      return res.render("error", {
+        message: "Такого покемона не существует"
+      });
+    }
+
+    return res.render("pokemon", {
+      pokemon,
+    });
+  }
 }

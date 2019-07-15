@@ -25,67 +25,67 @@ const templatesPath = config.templatesPath || "templates";
 
 export class App
 {
-    private preconfigureHandlebars()
-    {
-        hbs.registerHelper(layouts(hbs.handlebars));
+  private preconfigureHandlebars()
+  {
+    hbs.registerHelper(layouts(hbs.handlebars));
 
-        hbs.registerPartials(path.join(__dirname, "..", templatesPath));
-        Logger.log("Loaded helpers and partitials");
+    hbs.registerPartials(path.join(__dirname, "..", templatesPath));
+    Logger.log("Loaded helpers and partitials");
+  }
+
+  private configureHandlebars(app: NestExpressApplication)
+  {
+    app.setBaseViewsDir(path.join(__dirname, "..", templatesPath));
+    app.setViewEngine("hbs");
+    Logger.log("Loaded views");
+  }
+
+  private useStatic(app: NestExpressApplication)
+  {
+    app.useStaticAssets(path.join(__dirname, "..", "public"));
+    Logger.log("Loaded static assets");
+  }
+
+  private optimize(app: NestExpressApplication)
+  {
+    app.use(compression());
+    app.use(minify());
+    Logger.log("Loaded optimisations");
+  }
+
+  private setcookieParser(app: NestExpressApplication)
+  {
+    app.use(cookieParser());
+    Logger.log("Loaded cookie parser");
+  }
+
+  private setdevlogger(app: NestExpressApplication)
+  {
+    app.use(devlog);
+    Logger.log("Loaded dev logger");
+  }
+
+  public async bootstrap()
+  {
+    this.preconfigureHandlebars();
+
+    const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+    this.configureHandlebars(app);
+    this.useStatic(app);
+
+    this.setcookieParser(app);
+    this.optimize(app);
+
+    if (config.dev) {
+      this.setdevlogger(app);
     }
 
-    private configureHandlebars(app: NestExpressApplication)
-    {
-        app.setBaseViewsDir(path.join(__dirname, "..", templatesPath));
-        app.setViewEngine("hbs");
-        Logger.log("Loaded views");
+    if (!config.dev) {
+      this.optimize(app);
     }
 
-    private useStatic(app: NestExpressApplication)
-    {
-        app.useStaticAssets(path.join(__dirname, "..", "public"));
-        Logger.log("Loaded static assets");
-    }
-
-    private optimize(app: NestExpressApplication)
-    {
-        app.use(compression());
-        app.use(minify());
-        Logger.log("Loaded optimisations");
-    }
-
-    private setcookieParser(app: NestExpressApplication)
-    {
-        app.use(cookieParser());
-        Logger.log("Loaded cookie parser");
-    }
-
-    private setdevlogger(app: NestExpressApplication)
-    {
-        app.use(devlog);
-        Logger.log("Loaded dev logger");
-    }
-
-    public async bootstrap()
-    {
-        this.preconfigureHandlebars();
-
-        const app = await NestFactory.create<NestExpressApplication>(AppModule);
-
-        this.configureHandlebars(app);
-        this.useStatic(app);
-
-        this.setcookieParser(app);
-        this.optimize(app);
-
-        if (config.dev) {
-            this.setdevlogger(app);
-        }
-
-        if (!config.dev) {
-            this.optimize(app);
-        }
-
-        await app.listen(config.port);
-        Logger.log("App listens on " + config.port);
-    }
+    await app.listen(config.port);
+    Logger.log("App listens on " + config.port);
+  }
 }
