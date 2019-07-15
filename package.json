@@ -6,8 +6,7 @@
   "license": "GPL",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "start:dev": "concurrently --handle-input \"wait-on dist/main.js && nodemon\" \"tsc -w -p tsconfig.build.json\" ",
-    "start:debug": "nodemon --config nodemon-debug.json",
+    "start:dev": "tsc && npm run-script start:prod",
     "start:prod": "node bin/main.js",
     "lint": "tslint -p tsconfig.json -c tslint.json"
   },

@@ -3,6 +3,6 @@ import { Logger } from "@nestjs/common";
 
 export function devlog(req: express.Request, res: express.Response, next: () => void)
 {
-    Logger.log(req.method + " " + req.url, undefined, false);
+    Logger.log(req.method + " " + req.url, "DevLog", false);
     next();
 }
