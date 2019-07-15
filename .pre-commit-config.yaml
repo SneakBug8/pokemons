@@ -1,0 +1,11 @@
+- repo: https://github.com/awebdeveloper/pre-commit-tslint/
+  rev: master
+  hooks:
+    - id: tslint
+      args: ['--project','tsconfig.json','-c', 'tslint.json','--type-check']
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v2.2.3
+  hooks:
+    - id: trailing-whitespace
+    - id: check-yaml
+    - id: check-json
