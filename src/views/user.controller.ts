@@ -42,6 +42,7 @@ export class UserController
     }
 
     return res.render("user", {
+      title: "Личная страница игрока",
       user,
       pokemons,
       hidehomelink: true

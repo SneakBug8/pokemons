@@ -24,6 +24,7 @@ export class LeaderboardController
         }
 
         return res.render("leaderboard", {
+            title: "Таблица лидеров",
             leaderboard,
             hideleaderboardlink: 1
         });

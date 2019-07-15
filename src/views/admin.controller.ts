@@ -24,6 +24,7 @@ export class AdminController
         }
 
         return res.render("admin", {
+            title: "Админка",
             leaderboard
         });
     }

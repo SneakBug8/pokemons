@@ -1,8 +1,6 @@
 import { Controller, Get, Req, Res } from "@nestjs/common";
 import { PokemonService } from "../core/pokemon.service";
 import * as express from "express";
-import { User } from "../core/user";
-import { UserService } from "../core/user.service";
 
 @Controller()
 export class PokemonController
@@ -18,8 +16,8 @@ export class PokemonController
       return;
     }
 
-    const pokemonurl = match[1];
-    const pokemon = await this.pokemonService.GetByUrl(pokemonurl);
+    const pokemonslug = match[1];
+    const pokemon = await this.pokemonService.GetBySlug(pokemonslug);
 
     if (!pokemon) {
       return res.render("error", {
@@ -28,6 +26,7 @@ export class PokemonController
     }
 
     return res.render("pokemon", {
+      title: "Покемон " + pokemon.name,
       pokemon,
     });
   }
