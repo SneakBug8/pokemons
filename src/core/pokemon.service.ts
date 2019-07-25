@@ -66,4 +66,18 @@ export class PokemonService
 
         return undefined;
     }
+
+    public async GetAll(): Promise<Pokemon[] | undefined>
+    {
+        const res = await this.cmsService.collections.getWithParams<Pokemon[]>(this.pokemonTable,
+            {
+                limit: 1000
+            });
+
+        if (res) {
+            return res;
+        }
+
+        return undefined;
+    }
 }

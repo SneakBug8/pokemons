@@ -1,0 +1,31 @@
+{{#extend "index"}}
+{{#content "content"}}
+<a class="btn btn-primary" href="/admin">Админка</a>
+<table class="table">
+    <thead>
+        <th>
+            Покемон
+        </th>
+        <th>
+            QR
+        </th>
+    </thead>
+    <tbody>
+    {{#each pokemons}}
+    <tr>
+        <td>
+            {{name}}
+        </td>
+        <td>
+            {{#if url}}
+            <a class="btn btn-success" href="/qr/{{url}}">QR код</a>
+            {{else}}
+            <a class="btn btn-danger" href="javascript:undefined;">Пустой url</a>
+            {{/if}}
+        </td>
+    </tr>
+    {{/each}}
+    </tbody>
+</table>
+{{/content}}
+{{/extend}}

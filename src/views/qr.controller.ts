@@ -16,11 +16,13 @@ export class QRController
         const match = new RegExp("qr/(.+)/?").exec(req.url);
 
         if (!match) {
-            return;
+            return res.render("error", {
+                message: "Ошибка: url покемона пустой"
+            });
         }
 
-        const pokemonslug = match[1];
-        const pokemon = await this.pokemonService.GetBySlug(pokemonslug);
+        const pokemonurl = match[1];
+        const pokemon = await this.pokemonService.GetByUrl(pokemonurl);
 
         if (!pokemon) {
             return res.render("error", {
