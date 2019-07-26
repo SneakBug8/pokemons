@@ -18,17 +18,18 @@ export class CatchingController
     const match = new RegExp("c/(.+)/?").exec(req.url);
 
     if (!match) {
-      return;
+      return res.render("error", {
+        message: "Передан пустой url покемона"
+      });
     }
 
     const pokemonurl = match[1];
     const pokemon = await this.pokemonService.GetByUrl(pokemonurl);
 
     if (!pokemon) {
-      res.render("error", {
+      return res.render("error", {
         message: "Такого покемона не существует"
       });
-      return;
     }
 
     let userid: string | undefined;
