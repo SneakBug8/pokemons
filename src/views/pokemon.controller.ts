@@ -14,7 +14,11 @@ export class PokemonController
 
     if (!match) {
       return res.render("error", {
+<<<<<<< HEAD
         message: "Передан пустой slug покемона"
+=======
+        message: "Передан пустой url покемона"
+>>>>>>> ab7a3dec4bea8bf098b6a428a850666418f9f2af
       });
     }
 
