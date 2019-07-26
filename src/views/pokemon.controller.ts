@@ -13,7 +13,9 @@ export class PokemonController
     const match = new RegExp("p/(.+)/?").exec(req.url);
 
     if (!match) {
-      return;
+      return res.render("error", {
+        message: "Передан пустой url покемона"
+      });
     }
 
     const pokemonslug = match[1];
