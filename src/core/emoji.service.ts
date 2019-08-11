@@ -2,6 +2,7 @@ import { Injectable, Logger } from "@nestjs/common";
 
 import * as fs from "fs";
 import * as path from "path";
+const emojione = require("emojione");
 
 @Injectable()
 export class EmojiService
@@ -17,6 +18,9 @@ export class EmojiService
     {
         const text = fs.readFileSync(path.resolve(__dirname, "../../emojies.json"));
         this.emojies = JSON.parse(text.toString());
+        for (let i = 0; i < this.emojies.length; i++) {
+          this.emojies[i] = emojione.toImage(this.emojies[i]);
+        }
         Logger.log("Loaded " + this.emojies.length + " emojies");
     }
 
