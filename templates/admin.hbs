@@ -1,6 +1,9 @@
 {{#extend "index"}}
 {{#content "content"}}
-<a class="btn btn-primary" href="/admin/qrs">QR коды</a>
+<p>Это - тайная страница админов. Кнопки выше ведут на публичные страницы; вернуться в админку с них можно только через историю браузера.</p>
+
+<p><a class="btn btn-primary" href="/admin/qrs">QR коды</a> - сгенерировать QR коды и посмотреть описания</p>
+
 <table class="table">
     <thead>
         <th>
@@ -18,13 +21,13 @@
         {{#if show}}
         <tr>
             {{#if receivedprize}}
-            <td><s>{{emojies}}</s></td>
+            <td><s>{{{emojies}}}</s></td>
             <td>
                 <s>{{capturedamount}}</s>
             </td>
             <td>
                 <a class="btn btn-danger" href="#"
-                    onclick="var res = confirm('Исправить за {{emojies}}?'); if (res) {window.location='/fix/{{id}}'}">Исправить</a>
+                    onclick="var res = confirm('Исправить за {{emojies}}?'); if (res) {window.location='/fix/{{id}}'}">Отметить, что приз ещё не выдан</a>
             </td>
             {{else}}
             <td>
@@ -35,7 +38,7 @@
             </td>
             <td>
                 <a class="btn btn-success" href="#"
-                    onclick="var res = confirm('Получить за {{emojies}}?'); if (res) {window.location='/receive/{{id}}'}">Получить</a>
+                    onclick="var res = confirm('Получить за {{emojies}}?'); if (res) {window.location='/receive/{{id}}'}">Отметить, что он получил приз</a>
             </td>
             {{/if}}
         </tr>
