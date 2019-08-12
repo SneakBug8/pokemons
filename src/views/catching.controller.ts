@@ -51,8 +51,9 @@ export class CatchingController
       user.captures.push(pokemonurl);
       this.userService.Save(user);
 
-      return res.render("action", {
-        message: "Вы поймали покемона " + pokemon.name
+      return res.render("caught", {
+        title: "Пойман покемон " + pokemon.name,
+        pokemon,
       });
     }
     else {
